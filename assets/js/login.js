@@ -49,15 +49,17 @@ $(function() {
   })
 
 // 监听登录表单的提交事件
-$('#form_login').submit(function(e) {
+$('#form_login').on("submit",function(e) {
   // 阻止默认提交行为
-  e.preventDefault()
-  $.ajax({
+  e.preventDefault();
+  
+   $.ajax({
     url: '/api/login',
-    method: 'POST',
+    type: 'POST',
     // 快速获取表单中的数据
     data: $(this).serialize(),
     success: function(res) {
+      console.log(res);
       if (res.status !== 0) {
         return layer.msg('登录失败！')
       }
@@ -68,6 +70,8 @@ $('#form_login').submit(function(e) {
       location.href = '/index.html'
     }
   })
+
+  return false;
 })  
 
 
